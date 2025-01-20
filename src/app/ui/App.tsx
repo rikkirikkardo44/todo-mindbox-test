@@ -1,8 +1,6 @@
 import * as React from 'react';
-import './App.css';
 
-function App() {
+export function App() {
   return <main>App</main>;
 }
 
-export default App;
