@@ -1,6 +1,11 @@
 import * as React from 'react';
 
-export function App() {
-  return <main>App</main>;
-}
+import { TodosProvider } from '@entities/todos';
 
+export function App() {
+  return (
+    <TodosProvider>
+      <main>App</main>
+    </TodosProvider>
+  );
+}
