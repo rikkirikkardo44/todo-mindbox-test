@@ -1,11 +1,17 @@
-import * as React from 'react';
+import React from 'react';
 
 import { TodosProvider } from '@entities/todos';
+
+import { MainPage } from '@pages/main';
+
+import { MainLayout } from '@widgets/main-layout';
 
 export function App() {
   return (
     <TodosProvider>
-      <main>App</main>
+      <MainLayout>
+        <MainPage />
+      </MainLayout>
     </TodosProvider>
   );
 }

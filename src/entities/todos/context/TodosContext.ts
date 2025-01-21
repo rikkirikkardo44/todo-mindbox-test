@@ -1,14 +1,17 @@
 import { createContext } from 'react';
-import { TodoItem } from '@entities/todos/types.ts';
+
+import { TodoItem } from '../types.ts';
 
 export type TodosContextState = {
   todosList: TodoItem[];
+  selectedTodos: Set<string>;
 };
 
 export type TodosContextActions = {
   addTodo: (name: string) => void;
-  deleteTodo: (id: string) => void;
+  deleteTodos: () => void;
   toggleStatus: (id: string) => void;
+  toggleTodosSelected: (id: string) => void;
 };
 
 export const TodosContext = createContext<
@@ -16,16 +19,20 @@ export const TodosContext = createContext<
 >([
   {
     todosList: [],
+    selectedTodos: new Set(),
   },
   {
     addTodo: () => {
       throw new Error('Method "addTodo" not implemented');
     },
-    deleteTodo: () => {
+    deleteTodos: () => {
       throw new Error('Method "deleteTodo" not implemented');
     },
     toggleStatus: () => {
       throw new Error('Method "toggleStatus" not implemented');
+    },
+    toggleTodosSelected: () => {
+      throw new Error('Method "toggleTodosSelected" not implemented');
     },
   },
 ]);

@@ -20,10 +20,10 @@
 }
 
 
-@mixin rem($pixel) {
+@function rem($pixel) {
   @if math.is-unitless($pixel) {
-  @return math . div($pixel, 16) + rem;
+    @return math.div($pixel, 16) + rem;
   } @else {
-    @error "Для работы с функцией rem передавайте аргументом только числа."
+    @error "Для работы с функцией rem передавайте аргументом только числа.";
   }
 }

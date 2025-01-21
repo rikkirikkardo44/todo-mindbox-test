@@ -1,0 +1,108 @@
+@use '@shared/styles/mixins' as *;
+
+.todos-list-section {
+  border: 2px dashed #949494;
+  border-radius: rem(8);
+  height: 100%;
+  max-height: rem(1000);
+  width: rem(800);
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  header {
+    padding: rem(16);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .empty-stub {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include fluid-text(48, 24);
+    color: #949494;
+  }
+}
+
+.todos-list {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.todos-item {
+  @include fluid-text(48, 24);
+
+  font-style: italic;
+  padding: rem(48) rem(16);
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  gap: rem(16);
+  line-height: 0.80;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &__name {
+    cursor: pointer;
+  }
+
+  &--completed {
+    .todos-item__name {
+      text-decoration: line-through;
+      color: gray;
+      text-decoration-color: darkred;
+    }
+  }
+}
+
+.add-todos-form {
+  width: 100%;
+
+  input {
+    @include fluid-text(48, 24);
+
+    width: 100%;
+    border: none;
+    padding: rem(16);
+  }
+}
+
+.todos-list-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: rem(8);
+  padding: rem(48) rem(32) rem(32) rem(32);
+  position: sticky;
+  bottom: 0;
+  left: 0;
+
+  button {
+    @include fluid-text(36, 16);
+    padding: rem(16);
+    cursor: pointer;
+    background-color: #0075ff;
+    color: white;
+    border-radius: rem(5);
+
+    &:hover {
+      background-color: #4097FF;
+    }
+  }
+}
+
+.todos-filter {
+  @include fluid-text(36, 16);
+  display: flex;
+  gap: rem(8);
+
+  .filter-item {
+    label {
+      cursor: pointer;
+    }
+  }
+}
