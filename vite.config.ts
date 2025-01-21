@@ -6,6 +6,9 @@ import path from 'path';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
+  build: {
+    outDir: 'dist',
+  },
   resolve: {
     alias: {
       '@shared': path.resolve(__dirname, 'src/shared'),
