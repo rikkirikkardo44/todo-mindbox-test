@@ -1,11 +1,14 @@
 import { FC, PropsWithChildren, useCallback, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
+import { TodoItem, TodoStatus } from '../types.ts';
 import { TodosContext } from './TodosContext.ts';
-import { TodoItem, TodoStatus } from '@entities/todos/types.ts';
 
 export const TodosProvider: FC<PropsWithChildren> = ({ children }) => {
   const [todosList, setTodosList] = useState<TodoItem[]>([]);
+  const [selectedTodos, setSelectedTodos] = useState<Set<string>>(
+    new Set<string>(),
+  );
 
   const addTodo = useCallback((name: string) => {
     setTodosList((prev) => [
@@ -19,9 +22,10 @@ export const TodosProvider: FC<PropsWithChildren> = ({ children }) => {
     ]);
   }, []);
 
-  const deleteTodo = useCallback((id: string) => {
-    setTodosList((prev) => prev.filter((item) => item.id !== id));
-  }, []);
+  const deleteTodos = useCallback(() => {
+    setTodosList((prev) => prev.filter((item) => !selectedTodos.has(item.id)));
+    setSelectedTodos(new Set());
+  }, [selectedTodos]);
 
   const toggleStatus = useCallback((id: string) => {
     setTodosList((prev) =>
@@ -41,9 +45,26 @@ export const TodosProvider: FC<PropsWithChildren> = ({ children }) => {
     );
   }, []);
 
+  const toggleTodosSelected = useCallback((id: string): void => {
+    setSelectedTodos((prev) => {
+      const copy = new Set(prev);
+
+      if (copy.has(id)) {
+        copy.delete(id);
+      } else {
+        copy.add(id);
+      }
+
+      return copy;
+    });
+  }, []);
+
   return (
     <TodosContext.Provider
-      value={[{ todosList }, { deleteTodo, addTodo, toggleStatus }]}
+      value={[
+        { todosList, selectedTodos },
+        { deleteTodos, addTodo, toggleStatus, toggleTodosSelected },
+      ]}
     >
       {children}
     </TodosContext.Provider>

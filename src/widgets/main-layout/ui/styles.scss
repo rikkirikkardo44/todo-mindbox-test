@@ -1,0 +1,20 @@
+@use '@shared/styles/mixins' as *;
+
+.main-wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: rem(16);
+  gap: rem(32);
+}
+
+.main-header {
+  padding: rem(32) 0 rem(32) 0;
+
+  h1 {
+    @include fluid-text(96, 48);
+  }
+}
